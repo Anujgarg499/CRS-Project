@@ -179,7 +179,7 @@ public class adminLogin extends javax.swing.JFrame {
         if("admin".equals(admin) && "password".equals(pass))
         {
             JOptionPane.showMessageDialog(null,"Logged in sucessfully");
-            adminLogin obj=new adminLogin();
+            mainPage obj=new mainPage();
             obj.setVisible(true);
             this.hide();
         }
