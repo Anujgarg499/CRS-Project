@@ -142,7 +142,7 @@ public class welcomePage extends javax.swing.JFrame {
         adminLogin s = new adminLogin();
             try {
                   for(int i =0;i<=100;i++){
-                Thread.sleep(100);
+                Thread.sleep(50);
                 wp.jProgressBar1.setValue(i);
                 wp.jLabel2.setText(Integer.toString(i)+"%");
                 if(i==100){
