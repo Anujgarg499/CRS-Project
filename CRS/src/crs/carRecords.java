@@ -73,13 +73,13 @@ public class carRecords extends javax.swing.JFrame {
         jTable3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "CAR NAME", "CAR MODEL", "CAR NO.", "CAR TYPE", "RC NO.", "INSURANCE NO."
+                "ID", "CAR NAME", "CAR MODEL", "CAR NO.", "CAR TYPE", "AVAILABLE", "RC NO.", "INSURANCE NO."
             }
         ));
         jScrollPane3.setViewportView(jTable3);
