@@ -5,6 +5,15 @@
  */
 package crs;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
@@ -14,10 +23,20 @@ public class createCustomer extends javax.swing.JFrame {
     /**
      * Creates new form createCustomer
      */
+    Connection con = null;
+PreparedStatement pst = null;
+ResultSet rs = null;
     public createCustomer() {
         initComponents();
     }
+private void groupButton( ) {
 
+        ButtonGroup bg1 = new ButtonGroup( );
+
+        bg1.add(jRadioButton1);
+        bg1.add(jRadioButton2);
+
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,10 +110,20 @@ public class createCustomer extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(36, 117, 176));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton1.setText("CREATE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(36, 117, 176));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton2.setText("VIEW ALL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(36, 117, 176));
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -170,10 +199,20 @@ public class createCustomer extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jRadioButton1.setText("Male");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jRadioButton2.setText("Female");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -322,6 +361,71 @@ public class createCustomer extends javax.swing.JFrame {
             this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        gender="male";
+            jRadioButton1.setSelected(false);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+         gender="female";
+            jRadioButton1.setSelected(false);
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String fname= jTextField1.getText();
+        String lname= jTextField2.getText();
+        int phn = Integer.parseInt(jTextField3.getText());
+        String email= jTextField4.getText();
+        String add= jTextArea2.getText();
+        String lic=jTextField5.getText();
+        String altid=jTextField6.getText();
+        if(fname.equals("") || lname.equals("") || email.equals("") || add.equals("") || lic.equals(""))
+        {
+        JOptionPane.showMessageDialog(null, "Please fill all the fields");
+         } 
+        else{
+      try{
+  
+String sql = "INSERT INTO customer"
++"(first_name, last_name, mobile_no,gender, email_id, address, licence_no, alt_id)"
++"VALUES (?,?,?,?,?,?,?,?)";
+con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
+pst = con.prepareStatement(sql);
+pst.setString(1,fname);
+pst.setString(2,lname);
+pst.setInt(3,phn);
+pst.setString(4,gender);
+pst.setString(5,email);
+pst.setString(6,add);
+pst.setString(7,lic);
+pst.setString(8,altid);
+pst.executeUpdate();
+JOptionPane.showMessageDialog(null, "inserted successfully");
+jTextField1.setText("");
+jTextField2.setText("");
+jTextField3.setText("");
+jTextField4.setText("");
+jTextField5.setText("");
+jTextField6.setText("");
+jTextArea2.setText("");
+buttonGroup1.clearSelection();
+ } 
+catch(SQLException | HeadlessException ex){
+JOptionPane.showMessageDialog(null, ex);
+}
+        }        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        customerRecords cr = new customerRecords();
+            cr.setVisible(true);
+            this.hide();
+    }//GEN-LAST:event_jButton2ActionPerformed
+private String gender;
     /**
      * @param args the command line arguments
      */
