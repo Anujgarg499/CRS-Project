@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package crs;
-
+import java.sql.*;
+import javax.swing.*;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author user
@@ -14,6 +16,9 @@ public class customerRecords extends javax.swing.JFrame {
     /**
      * Creates new form customerRecords
      */
+    Connection con = null;
+PreparedStatement pst = null;
+ResultSet rs = null;
     public customerRecords() {
         initComponents();
     }
@@ -100,6 +105,11 @@ public class customerRecords extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(36, 117, 176));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton1.setText("VIEW");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(36, 117, 176));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -226,6 +236,24 @@ public class customerRecords extends javax.swing.JFrame {
             this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        showTableData();
+    }//GEN-LAST:event_jButton1ActionPerformed
+ public void showTableData(){
+try{
+con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
+String sql = "SELECT * FROM customer";
+pst = con.prepareStatement(sql);
+rs=pst.executeQuery();
+jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+}
+catch(SQLException ex){
+JOptionPane.showMessageDialog(null, ex);
+ 
+}
+ 
+}
     /**
      * @param args the command line arguments
      */
