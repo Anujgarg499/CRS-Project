@@ -5,6 +5,15 @@
  */
 package crs;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
+
 /**
  *
  * @author user
@@ -14,6 +23,9 @@ public class carRecords extends javax.swing.JFrame {
     /**
      * Creates new form carRecords
      */
+    Connection con = null;
+PreparedStatement pst = null;
+ResultSet rs = null;
     public carRecords() {
         initComponents();
     }
@@ -100,6 +112,11 @@ public class carRecords extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(36, 117, 176));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton1.setText("VIEW");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(36, 117, 176));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -126,6 +143,11 @@ public class carRecords extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(36, 117, 176));
         jButton5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton5.setText("DELETE");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -226,6 +248,29 @@ public class carRecords extends javax.swing.JFrame {
             this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        showTableData();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jButton5ActionPerformed
+public void showTableData(){
+try{
+con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
+String sql = "SELECT * FROM car";
+pst = con.prepareStatement(sql);
+rs=pst.executeQuery();
+jTable3.setModel(DbUtils.resultSetToTableModel(rs));
+}
+catch(SQLException ex){
+JOptionPane.showMessageDialog(null, ex);
+ 
+}
+ 
+}
     /**
      * @param args the command line arguments
      */

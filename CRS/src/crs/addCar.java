@@ -5,6 +5,14 @@
  */
 package crs;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Abhi
@@ -14,6 +22,9 @@ public class addCar extends javax.swing.JFrame {
     /**
      * Creates new form addCar
      */
+    Connection con = null;
+PreparedStatement pst = null;
+ResultSet rs = null;
     public addCar() {
         initComponents();
     }
@@ -189,10 +200,20 @@ public class addCar extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(36, 117, 176));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton1.setText("CREATE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(36, 117, 176));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton2.setText("VIEW ALL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(36, 117, 176));
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -311,6 +332,59 @@ public class addCar extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String carname= jTextField1.getText();
+        String carmodel= jTextField2.getText();
+        String carnumber = jTextField3.getText();
+        String cartype= jComboBox1.getSelectedItem().toString();
+        String basefare= jTextField7.getText();
+        String available =jComboBox2.getSelectedItem().toString();
+        String rcno=jTextField5.getText();
+        String insurance=jTextField6.getText();
+        if(carname.equals("") || carmodel.equals("") || carnumber.equals("") || cartype.equals("") || basefare.equals("")|| available.equals("")|| rcno.equals("")|| insurance.equals(""))
+        {
+        JOptionPane.showMessageDialog(null, "Please fill all the fields");
+         } 
+        else{
+      try{
+  
+String sql = "INSERT INTO car"
++"(car_name, car_model,car_number,car_type, car_basefare, car_available, car_rcno, car_insurance)"
++"VALUES (?,?,?,?,?,?,?,?)";
+con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
+pst = con.prepareStatement(sql);
+pst.setString(1,carname);
+pst.setString(2,carmodel);
+pst.setString(3,carnumber);
+pst.setString(4,cartype);
+pst.setString(5,basefare);
+pst.setString(6,available);
+pst.setString(7,rcno);
+pst.setString(8,insurance);
+pst.executeUpdate();
+JOptionPane.showMessageDialog(null, "inserted successfully");
+jTextField1.setText("");
+jTextField2.setText("");
+jTextField3.setText("");
+jTextField5.setText("");
+jTextField6.setText("");
+jTextField7.setText("");
+
+ } 
+catch(SQLException | HeadlessException ex){
+JOptionPane.showMessageDialog(null, ex);
+}
+        }        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        carRecords carRec = new carRecords();
+            carRec.setVisible(true);
+            this.hide();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
