@@ -255,7 +255,21 @@ ResultSet rs = null;
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-       
+        int opt = JOptionPane.showConfirmDialog(null,"Are you sure! you want to Delete","Delete",JOptionPane.YES_NO_OPTION);
+       int row = jTable3.getSelectedRow();
+        String cell = jTable3.getModel().getValueAt(row,0).toString();
+        String sql="DELETE FROM car where car_id=" + cell;
+         if(opt==0){
+        try{
+        con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
+        pst = con.prepareStatement(sql);
+        pst.execute();
+        JOptionPane.showMessageDialog(null,"Deleted Successfully");
+        showTableData();
+}
+catch(SQLException ex){
+JOptionPane.showMessageDialog(null, ex);
+}}
     }//GEN-LAST:event_jButton5ActionPerformed
 public void showTableData(){
 try{

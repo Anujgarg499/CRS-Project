@@ -136,6 +136,11 @@ ResultSet rs = null;
         jButton5.setBackground(new java.awt.Color(36, 117, 176));
         jButton5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton5.setText("DELETE");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -240,6 +245,25 @@ ResultSet rs = null;
         // TODO add your handling code here:
         showTableData();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        int opt = JOptionPane.showConfirmDialog(null,"Are you sure! you want to Delete","Delete",JOptionPane.YES_NO_OPTION);
+        int row = jTable1.getSelectedRow();
+        String cell = jTable1.getModel().getValueAt(row,0).toString();
+        String sql="DELETE FROM customer where id=" + cell;
+        if(opt==0){
+        try{
+        con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
+        pst = con.prepareStatement(sql);
+        pst.execute();
+        JOptionPane.showMessageDialog(null,"Deleted Successfully");
+        showTableData();
+}
+catch(SQLException ex){
+JOptionPane.showMessageDialog(null, ex);
+}}
+    }//GEN-LAST:event_jButton5ActionPerformed
  public void showTableData(){
 try{
 con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
