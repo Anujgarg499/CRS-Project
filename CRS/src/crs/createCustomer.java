@@ -377,7 +377,7 @@ private void groupButton( ) {
         // TODO add your handling code here:
         String fname= jTextField1.getText();
         String lname= jTextField2.getText();
-        int phn = Integer.parseInt(jTextField3.getText());
+        String phn = jTextField3.getText();
         String email= jTextField4.getText();
         String add= jTextArea2.getText();
         String lic=jTextField5.getText();
@@ -396,7 +396,7 @@ con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
 pst = con.prepareStatement(sql);
 pst.setString(1,fname);
 pst.setString(2,lname);
-pst.setInt(3,phn);
+pst.setString(3,phn);
 pst.setString(4,gender);
 pst.setString(5,email);
 pst.setString(6,add);
