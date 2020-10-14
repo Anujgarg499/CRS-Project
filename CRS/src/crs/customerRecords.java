@@ -114,6 +114,11 @@ ResultSet rs = null;
         jButton2.setBackground(new java.awt.Color(36, 117, 176));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton2.setText("UPDATE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(36, 117, 176));
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -264,6 +269,13 @@ catch(SQLException ex){
 JOptionPane.showMessageDialog(null, ex);
 }}
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        updateCustomer upCust = new updateCustomer();
+        upCust.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_jButton2ActionPerformed
  public void showTableData(){
 try{
 con = DriverManager.getConnection("jdbc:mysql://localhost/crs","root","");
