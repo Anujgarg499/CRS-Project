@@ -49,6 +49,7 @@ private void groupButton( ) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -130,6 +131,7 @@ private void groupButton( ) {
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setText("Gender");
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jRadioButton1.setText("Male");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +140,7 @@ private void groupButton( ) {
             }
         });
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jRadioButton2.setText("Female");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -332,7 +335,7 @@ private void groupButton( ) {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
          gender="female";
-            jRadioButton1.setSelected(false);
+            jRadioButton2.setSelected(false);
         
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
@@ -372,6 +375,7 @@ jTextField4.setText("");
 jTextField5.setText("");
 jTextField6.setText("");
 jTextArea2.setText("");
+buttonGroup1.clearSelection();
 showTableData();
  } 
 catch(SQLException | HeadlessException ex){
@@ -416,7 +420,7 @@ private String gender;
              jRadioButton1.setSelected(true);
          }
          else{
-             jRadioButton1.setSelected(true);
+             jRadioButton2.setSelected(true);
          }
          jTextField4.setText(model.getValueAt(selectedRow, 5).toString());
          jTextArea2.setText(model.getValueAt(selectedRow, 6).toString());
@@ -465,6 +469,7 @@ private String gender;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
