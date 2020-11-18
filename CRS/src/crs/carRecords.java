@@ -296,7 +296,6 @@ catch(SQLException ex){
 JOptionPane.showMessageDialog(null, ex);
  
 }
- 
 }
     /**
      * @param args the command line arguments
