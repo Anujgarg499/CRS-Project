@@ -232,6 +232,11 @@ public class mainPage extends javax.swing.JFrame {
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/crs/Images/payment_bill-512.png"))); // NOI18N
         jButton7.setText("Billing");
         jButton7.setPreferredSize(new java.awt.Dimension(267, 105));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -380,6 +385,13 @@ public class mainPage extends javax.swing.JFrame {
             bk.setVisible(true);
             this.hide();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        billing bill = new billing();
+            bill.setVisible(true);
+            this.hide();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
