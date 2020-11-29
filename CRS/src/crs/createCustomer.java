@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
+
+
 /**
  *
  * @author user
@@ -382,12 +384,21 @@ private void groupButton( ) {
         String add= jTextArea2.getText();
         String lic=jTextField5.getText();
         String altid=jTextField6.getText();
-        if(fname.equals("") || lname.equals("") || email.equals("") || add.equals("") || lic.equals(""))
+        String regex_mail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{1,}$";
+        boolean result1 = email.matches(regex_mail);
+        String regex_phn = "^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$"; 
+        boolean result2 = phn.matches(regex_phn);
+       if(fname.equals("") || lname.equals("") ||email.equals("") || add.equals("") || lic.equals(""))
         {
         JOptionPane.showMessageDialog(null, "Please fill all the fields");
          } 
         else{
       try{
+           if(!result1 || !result2)
+           {
+                JOptionPane.showMessageDialog(null, "Please enter valid details ");
+           } 
+           else {
   
 String sql = "INSERT INTO customer"
 +"(first_name, last_name, mobile_no,gender, email_id, address, licence_no, alt_id)"
@@ -412,7 +423,7 @@ jTextField5.setText("");
 jTextField6.setText("");
 jTextArea2.setText("");
 buttonGroup1.clearSelection();
- } 
+ } }
 catch(SQLException | HeadlessException ex){
 JOptionPane.showMessageDialog(null, ex);
 }
