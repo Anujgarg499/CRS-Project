@@ -603,6 +603,9 @@ JOptionPane.showMessageDialog(null, ex);
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        printBill pb = new printBill();
+        pb.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField12MouseExited

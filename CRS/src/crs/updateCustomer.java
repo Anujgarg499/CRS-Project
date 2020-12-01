@@ -15,6 +15,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
+import java.util.*;
 
 /**
  *
@@ -355,12 +356,21 @@ private void groupButton( ) {
         String add= jTextArea2.getText();
         String lic=jTextField5.getText();
         String altid=jTextField6.getText();
+        String regex_mail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{1,}$";
+        boolean result1 = email.matches(regex_mail);
+        String regex_phn = "^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$"; 
+        boolean result2 = phn.matches(regex_phn);
         if(fname.equals("") || lname.equals("") || email.equals("") || add.equals("") || lic.equals(""))
         {
         JOptionPane.showMessageDialog(null, "Please fill all the fields");
          } 
         else{
       try{ 
+          if(!result1 || !result2)
+           {
+                JOptionPane.showMessageDialog(null, "Please enter valid details ");
+           } 
+           else {
           int row = jTable1.getSelectedRow();
         String cell = jTable1.getModel().getValueAt(row,0).toString();
 String sql = "UPDATE customer set first_name ='"+fname+"',last_name ='"+lname+"',mobile_no ='"+phn+"',gender ='"+gender+"',email_id ='"+email+"',address ='"+add+"',licence_no ='"+lic+"',alt_id ='"+altid+"' where id='"+cell+"'";
@@ -378,6 +388,7 @@ jTextArea2.setText("");
 buttonGroup1.clearSelection();
 showTableData();
  } 
+      }
 catch(SQLException | HeadlessException ex){
 JOptionPane.showMessageDialog(null, ex);
 }
